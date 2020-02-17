@@ -12,6 +12,7 @@ let height = 300;
 let margin_x = 0;
 let margin_y = 0;
 let framed = false;
+let canQuit = false;
 
 function setOptions(options) {
   if (!validation(options)) return;
@@ -117,8 +118,12 @@ function setWindowAutoHide() {
     }
   });
   window.on("close", function(event) {
-    event.preventDefault();
-    window.hide();
+    if (canQuit === false) {
+      event.preventDefault();
+      window.hide();
+    } else {
+      electron.app.quit();
+    }
   });
 }
 
@@ -193,4 +198,9 @@ function calculateWindowPosition() {
   return { x: x, y: y };
 }
 
-module.exports = { setOptions, setTray, setWindow, setWindowSize };
+function quitApp() {
+  canQuit = true;
+  window.close();
+}
+
+module.exports = { setOptions, setTray, setWindow, setWindowSize, quitApp };
