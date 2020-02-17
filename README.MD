@@ -152,6 +152,16 @@ trayWindow.setWindowSize({
 //..
 ```
 
+## .quitApp(  )
+
+```js
+//...
+
+trayWindow.quitApp();
+
+//..
+```
+
 ## Events
 
 You can listen events. All event contains window and tray objects
